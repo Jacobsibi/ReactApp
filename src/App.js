@@ -1,4 +1,4 @@
-import  { useEffect }  from 'react';
+import  { useState, useEffect }  from 'react';
 import MovieCard from './MovieCard';
 import './App.css';
 import SearchIcon from './search.svg';
@@ -16,6 +16,9 @@ const movie1 = {
 }
 
 const App = () => {
+  //useState, default value of Array
+  const [movies, setMovies] = useState([]);
+
   //async = asynchronous data (takes time to fetch this data)
   //accepts movie title to search by
   const searchMovies = async (title) => {
@@ -25,7 +28,7 @@ const App = () => {
     const response = await fetch(`${API_URL}&s=${title}`);
     //retrieve data 
     const data = await response.json();
-    console.log(data.Search);
+    setMovies(data.Search);
   }
   useEffect(() => {
     //call function which will fetch movies
@@ -52,9 +55,22 @@ const App = () => {
           onClick={() => {}}
         />
       </div>
-      <div className="container">
-        <MovieCard movie1={movie1}/>
-      </div>
+
+      {movies?.length > 0
+        ? (
+          <div className="container">
+            {/* dynamically mapping over movie array which is fetched using API 
+               then taking each individual movie and dynamically passing it as a prop
+               to MovieCard */} 
+            {movies.map((movie) => (
+              <MovieCard movie={movie}/>
+            ))}
+          </div>
+        ) : (
+          <div className="empty"> 
+            <h2>No movies found</h2>
+          </div>
+        )}
     </div>
   );
 }
