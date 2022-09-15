@@ -7,17 +7,10 @@ import SearchIcon from './search.svg';
 //calling API
 const API_URL = 'http://www.omdbapi.com?apikey=1d859fa6';
 
-const movie1 = {
-    "Title": "The Dark Knight",
-    "Year": "2008",
-    "imdbID": "tt0468569",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg"
-}
-
 const App = () => {
   //useState, default value of Array
   const [movies, setMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   //async = asynchronous data (takes time to fetch this data)
   //accepts movie title to search by
@@ -43,16 +36,17 @@ const App = () => {
       <div className="search">  
         <input 
           placeholder="Search for movies"
-          //statically set value to The Dark Knight (can't change it)
-          value="The Dark Knight"
-          //inorder to change search value, onChange with call back function
-          onChange={() => {}}
+          //dynamic search
+          value={searchTerm}
+          //e = event, onChange allows a search word to be typed in search box
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <img 
           src={SearchIcon}
           //every image needs alt tag for screen readers
           alt="search"
-          onClick={() => {}}
+          //dynamically re-render our search of movies
+          onClick={() => searchMovies(searchTerm)}
         />
       </div>
 
