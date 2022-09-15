@@ -1,10 +1,19 @@
 import  { useEffect }  from 'react';
+import MovieCard from './MovieCard';
 import './App.css';
 import SearchIcon from './search.svg';
 {/* */}
 {/* key: 1d859fa6 */}
 //calling API
 const API_URL = 'http://www.omdbapi.com?apikey=1d859fa6';
+
+const movie1 = {
+    "Title": "The Dark Knight",
+    "Year": "2008",
+    "imdbID": "tt0468569",
+    "Type": "movie",
+    "Poster": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg"
+}
 
 const App = () => {
   //async = asynchronous data (takes time to fetch this data)
@@ -44,7 +53,7 @@ const App = () => {
         />
       </div>
       <div className="container">
-
+        <MovieCard movie1={movie1}/>
       </div>
     </div>
   );
