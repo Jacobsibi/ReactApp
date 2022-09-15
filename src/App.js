@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 {/**/}
 //arrow function component
 const App = () => {
@@ -34,6 +34,20 @@ const App = () => {
       //in react this is called a "hook"
       //second variable is a setter function of the first
       const [counter, setCounter] = useState(0);
+
+      useEffect(() => {
+        setCounter(100);
+      }, //dependency array if left empty, useEffect only rendered once 
+        []
+      );
+
+      useEffect(() => {
+        alert("Count changed to " + counter);
+      }, //displays alert every time count changes
+        [counter]
+      );
+
+
       return (
         <div className="count">
           {/* each click is registered and re-renders the view (no page re-loading)*/}
